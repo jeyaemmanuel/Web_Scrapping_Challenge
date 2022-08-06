@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css"
+        href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>Mission to Mars</title>
+</head>
+<style>
+    th, td {
+    padding: 15px;
+    text-align: left;
+    }
+</style>
+
+<body>
+
+    <div class="container-fluid">
+        <div class="jumbotron text-center">
+            <h1 class="display-3"><b>Mission to Mars</b></h1>
+            <hr class="my-4">
+            <p class="lead">
+                <a class="btn btn-primary btn-lg" href="/scrape" role="button">Scrape New Data</a>
+            </p>
+        </div>
+
+        <div class="container-fluid">
+            <h2><b>Latest Mars News</b></h2>
+            <h5>{{ mars_data.news_title }}</h5>
+            <p>{{ mars_data.news_para }}</p>
+        </div>
+
+        <div class="container-fluid">
+            <div class='row'>
+                <div class="col-md-6">
+                    <h2 font-family:Impact;text-align: center;><b>Featured Mars Image</b></h2>
+                    <img src="{{mars_data.featured_image_url}}" style="max-width:100%;" alt="mars image">
+                </div>
+                <div class="col-md-6">
+                    <h2><b>Mars Facts</b></h2>
+                    <table>{{ mars_data.mf_df|safe}}</table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br><br><br>
+
+    <div class="container text-center">
+        <h2><b>Mars Hemispheres</b></h2>
+        <div class="row">
+            {% for img in mars_data.hemisphere_image_urls %}
+            <div class="col-lg-6 col-sm-12">
+                <div class="card" style="size: 40rem;">
+                    <img src="{{img.img_url}}" class="card-img-top" alt="{{img.title}}">
+                    <div class="card-body">
+                        <p class="card-text" style="size: 40rem;"><b> {{img.title}} </b></p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+
+</html>
